@@ -51,12 +51,15 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_BATTERY_PERCENTAGE = "battery_percentage";
     private static final String KEY_FONT_SIZE = "font_size";
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
-    private static final String KEY_SCREEN_SAVER = "screensaver";
+    private static final String KEY_SCREEN_SAVER = "screensaver";    
+    private static final String KEY_HOME_ACTION = "home_action";
 
+    
     private CheckBoxPreference mAccelerometer;
     private CheckBoxPreference mBatteryPercentage;
     private ListPreference mFontSizePref;
     private CheckBoxPreference mNotificationPulse;
+    private CheckBoxPreference mHomeAction;
 
     private final Configuration mCurConfig = new Configuration();
     
@@ -80,6 +83,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
         mAccelerometer = (CheckBoxPreference) findPreference(KEY_ACCELEROMETER);
         mAccelerometer.setPersistent(false);
+        
+        mHomeAction = (CheckBoxPreference)findPreference(KEY_HOME_ACTION);
+    	mHomeAction.setChecked((Settings.System.getInt(resolver,  Settings.System.HOLD_HOME_RECENTS, 0) == 1));
+
         if (RotationPolicy.isRotationLockToggleSupported(getActivity())) {
             // If rotation lock is supported, then we do not provide this option in
             // Display settings.  However, is still available in Accessibility settings.
@@ -273,7 +280,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getContentResolver(), Settings.System.NOTIFICATION_LIGHT_PULSE,
                     value ? 1 : 0);
             return true;
-        }
+        } else if (preference == mHomeAction) {
+        	boolean value = mHomeAction.isChecked();
+	        Settings.System.putInt(getContentResolver(), Settings.System.HOLD_HOME_RECENTS,  value ? 1 : 0);
+       }   
+        
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 

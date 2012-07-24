@@ -50,11 +50,9 @@ public class NavBar extends Fragment {
     private final static Intent mIntent = new Intent("android.intent.action.NAVBAR_EDIT");
     private static final int MENU_RESET = Menu.FIRST;
     private static final int MENU_EDIT = Menu.FIRST + 1;
-    private static final String KEY_HOME_ACTION = "home_action";
 
-    private CheckBoxPreference mHomeAction;
 
-    @Override
+	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.nav_bar, container, false);
@@ -64,7 +62,6 @@ public class NavBar extends Fragment {
         mActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         return view;
     }
-
 
     /**
      * Toggles navbar edit mode
@@ -78,14 +75,14 @@ public class NavBar extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ContentResolver resolver = getActivity().getContentResolver();
-
-	mHomeAction = (CheckBoxPreference) findPreference(KEY_HOME_ACTION);
-        mHomeAction.setChecked((Settings.System.getInt(getContentResolver(),
-            Settings.System.HOLD_HOME_RECENTS, 0) == 1));
+    public void onResume() {
+        super.onResume();
+        // If running on a phone, remove padding around container
+        if (!Utils.isScreenLarge()) {
+            mContainer.setPadding(0, 0, 0, 0);
+        }
     }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -101,14 +98,6 @@ public class NavBar extends Fragment {
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);
     }
 
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference == mHomeAction) {
-           boolean value = mHomeAction.isChecked();
-            Settings.System.putInt(getContentResolver(), Settings.System.HOLD_HOME_RECENTS,
-                    value ? 1 : 0);
-        }
-        return super.onPreferenceTreeClick(preferenceScreen, preference);
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
