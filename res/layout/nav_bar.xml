@@ -35,4 +35,8 @@
         android:padding="4dip"
         android:textSize="13sp"
         android:text="@string/navigation_bar_tips" />
+    <CheckBoxPreference
+        android:key="home_action"
+        android:title="@string/navigation_bar_home_action"
+        android:defaultValue="false" />	
 </LinearLayout>

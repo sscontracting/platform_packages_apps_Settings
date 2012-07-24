@@ -35,7 +35,8 @@ import android.widget.Toast;
 import com.android.settings.R;
 import com.android.settings.Utils;
 
-public class NavBar extends Fragment {
+public class NavBar extends Fragment implements
+        Preference.OnPreferenceChangeListener {
 
     private boolean mEditMode;
     private ViewGroup mContainer;
@@ -43,6 +44,9 @@ public class NavBar extends Fragment {
     private final static Intent mIntent = new Intent("android.intent.action.NAVBAR_EDIT");
     private static final int MENU_RESET = Menu.FIRST;
     private static final int MENU_EDIT = Menu.FIRST + 1;
+    private static final String KEY_HOME_ACTION = "home_action";
+
+    private CheckBoxPreference mHomeAction;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,6 +58,7 @@ public class NavBar extends Fragment {
         mActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         return view;
     }
+
 
     /**
      * Toggles navbar edit mode
@@ -67,12 +72,13 @@ public class NavBar extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        // If running on a phone, remove padding around container
-        if (!Utils.isScreenLarge()) {
-            mContainer.setPadding(0, 0, 0, 0);
-        }
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ContentResolver resolver = getActivity().getContentResolver();
+
+	mHomeAction = (CheckBoxPreference) findPreference(KEY_HOME_ACTION);
+        mHomeAction.setChecked((Settings.System.getInt(getContentResolver(),
+            Settings.System.HOLD_HOME_RECENTS, 0) == 1));
     }
 
     @Override
@@ -87,6 +93,16 @@ public class NavBar extends Fragment {
         .setAlphabeticShortcut('s')
         .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (preference == mHomeAction) {
+           boolean value = mHomeAction.isChecked();
+            Settings.System.putInt(getContentResolver(), Settings.System.HOLD_HOME_RECENTS,
+                    value ? 1 : 0);
+        }
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     @Override
