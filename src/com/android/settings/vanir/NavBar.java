@@ -20,9 +20,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
@@ -39,8 +42,7 @@ import android.widget.Toast;
 import com.android.settings.R;
 import com.android.settings.Utils;
 
-public class NavBar extends Fragment implements
-        Preference.OnPreferenceChangeListener {
+public class NavBar extends Fragment {
 
     private boolean mEditMode;
     private ViewGroup mContainer;
@@ -99,7 +101,6 @@ public class NavBar extends Fragment implements
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);
     }
 
-    @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference == mHomeAction) {
            boolean value = mHomeAction.isChecked();
