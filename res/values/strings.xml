@@ -1522,9 +1522,6 @@
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary
          Label on Wifi Status screen-->
     <string name="scan_list_label" translatable="false">Scan results:</string>
-    
-    <string name="link_volume_ringtones">Link volumes</string>
-    <string name="link_volume_mutes">Link mute states</string>  
 
     <!-- wifi state values-->
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary -->
