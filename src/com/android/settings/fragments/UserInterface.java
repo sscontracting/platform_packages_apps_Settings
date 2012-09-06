@@ -50,7 +50,7 @@ import com.android.settings.util;
 
 import java.util.List;
 
-public class UserInterface extends AOKPPreferenceFragment {
+public class UserInterface extends SettingsPreferenceFragment {
 
     public static final String TAG = "UserInterface";
 
@@ -77,7 +77,6 @@ public class UserInterface extends AOKPPreferenceFragment {
 
         }
 
-        setHasOptionsMenu(true);
     }
 
     private void updateCustomLabelTextSummary() {
