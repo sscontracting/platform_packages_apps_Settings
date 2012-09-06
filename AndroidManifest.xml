@@ -97,7 +97,7 @@
             android:label="Statusbar Toggles" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="om.android.settings.SHORTCUT" />
+                <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
         </activity>
 

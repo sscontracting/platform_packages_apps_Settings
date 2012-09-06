@@ -68,7 +68,7 @@ public class UserInterface extends AOKPPreferenceFragment {
         super.onCreate(savedInstanceState);
         setTitle(R.string.title_ui);
         // Load the preferences from an XML resource
-        addPreferencesFromResource(R.xml.prefs_ui);
+        addPreferencesFromResource(R.xml.display_settings);
 
         PreferenceScreen prefs = getPreferenceScreen();
 
