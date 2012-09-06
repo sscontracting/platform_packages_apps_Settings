@@ -46,7 +46,7 @@ import android.widget.Toast;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
-import com.android.settings.util;
+import com.android.settings.Utils;
 
 import java.util.List;
 
@@ -84,14 +84,8 @@ public class UserInterface extends SettingsPreferenceFragment {
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
             Preference preference) {
-        
-         if (preference == mCustomBootAnimation) {
-            PackageManager packageManager = getActivity().getPackageManager();
-            Intent test = new Intent(Intent.ACTION_GET_CONTENT);
-            test.setType("file/*");
-            List<ResolveInfo> list = packageManager.queryIntentActivities(test, PackageManager.GET_ACTIVITIES);
             
-        } else if (preference == mCustomLabel) {
+        if (preference == mCustomLabel) {
             AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
 
             alert.setTitle(R.string.custom_carrier_label_title);
