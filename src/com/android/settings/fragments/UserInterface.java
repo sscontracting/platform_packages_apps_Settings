@@ -44,7 +44,7 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Toast;
 
-import com.android.settings.AOKPPreferenceFragment;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
 import com.android.settings.util;
 
