@@ -51,22 +51,15 @@ import com.android.settings.util;
 import java.util.List;
 
 public class UserInterface extends SettingsPreferenceFragment {
-
     public static final String TAG = "UserInterface";
-
     private static final String PREF_CUSTOM_CARRIER_LABEL = "custom_carrier_label";
 
     Preference mCustomLabel;
-
-    Random randomGenerator = new Random();
-
-    private int seekbarProgress;
     String mCustomLabelText = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle(R.string.title_ui);
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.display_settings);
 
@@ -75,8 +68,7 @@ public class UserInterface extends SettingsPreferenceFragment {
         mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
         updateCustomLabelTextSummary();
 
-        }
-
+        setHasOptionsMenu(true);
     }
 
     private void updateCustomLabelTextSummary() {
