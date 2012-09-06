@@ -20,6 +20,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -40,6 +41,7 @@ import android.widget.Button;
 public class SettingsPreferenceFragment extends PreferenceFragment implements DialogCreatable {
 
     private static final String TAG = "SettingsPreferenceFragment";
+    protected Context mContext;
 
     private static final int MENU_HELP = Menu.FIRST + 100;
 
@@ -60,6 +62,7 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
+        mContext = getActivity().getApplicationContext();
         super.onActivityCreated(savedInstanceState);
         if (!TextUtils.isEmpty(mHelpUrl)) {
             setHasOptionsMenu(true);

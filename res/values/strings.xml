@@ -4152,6 +4152,9 @@
 
     <!-- General Strings -->
     <string name="misc_short">Misc</string>
+	<string name="custom_carrier_label_title">Custom carrier label</string>
+	<string name="custom_carrier_label_explain">Please enter a custom carrier, or leave empty to revert to stock.</string>
+	<string name="custom_carrier_label_notset">Custom carrier not set</string>
 
     <!-- Statusbar | Toggles -->
     <string name="toggle_style_title">Toggle style</string>
