@@ -97,8 +97,7 @@
             android:label="Statusbar Toggles" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="com.aokp.romcontrol.SHORTCUT" />
+                <category android:name="om.android.settings.SHORTCUT" />
             </intent-filter>
         </activity>
 
