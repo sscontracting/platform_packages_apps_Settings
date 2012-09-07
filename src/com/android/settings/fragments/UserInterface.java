@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.util.Random;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -47,8 +48,6 @@ import android.widget.Toast;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
 import com.android.settings.Utils;
-
-import java.util.List;
 
 public class UserInterface extends SettingsPreferenceFragment {
     public static final String TAG = "UserInterface";
