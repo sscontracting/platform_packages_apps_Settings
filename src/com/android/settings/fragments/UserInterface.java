@@ -58,6 +58,7 @@ public class UserInterface extends SettingsPreferenceFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle(R.string.title_ui);
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.display_settings);
 
@@ -65,6 +66,8 @@ public class UserInterface extends SettingsPreferenceFragment {
 
         mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
         updateCustomLabelTextSummary();
+        
+        setHasOptionsMenu(true);
     }
 
     private void updateCustomLabelTextSummary() {

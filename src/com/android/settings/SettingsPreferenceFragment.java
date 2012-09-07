@@ -66,6 +66,10 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
             setHasOptionsMenu(true);
         }
     }
+    
+    public void setTitle(int resId) {
+        getActivity().setTitle(resId);
+    }
 
     /**
      * Override this if you want to show a help item in the menu, by returning the resource id.

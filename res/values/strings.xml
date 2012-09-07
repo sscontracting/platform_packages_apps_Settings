@@ -4150,6 +4150,9 @@
     <!-- Header Summaries needed to build -->
     <string name="header_summary_led">Change default settings for Android to use</string>
 
+    <!-- Activity titles defined in AndroidManifest.xml -->
+    <string name="title_ui">General User Interface</string>
+
     <!-- General Strings -->
     <string name="misc_short">Misc</string>
     <string name="custom_carrier_label_title">Custom carrier title</string>
