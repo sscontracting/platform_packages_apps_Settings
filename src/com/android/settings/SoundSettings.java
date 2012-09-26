@@ -168,8 +168,10 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         mNotificationPreference = findPreference(KEY_NOTIFICATION_SOUND);
 
         mVolBtnMusicCtrl = (CheckBoxPreference) findPreference(KEY_VOLBTN_MUSIC_CTRL);
-        mVolBtnMusicCtrl.setChecked(Settings.System.getInt(resolver,
+        if (mVolBtnMusicCtrl != null) {
+            mVolBtnMusicCtrl.setChecked(Settings.System.getInt(resolver,
                 Settings.System.VOLBTN_MUSIC_CONTROLS, 0) != 0);
+        }
 
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         if (vibrator == null || !vibrator.hasVibrator()) {
@@ -185,7 +187,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             emergencyTonePreference.setOnPreferenceChangeListener(this);
         }
         
-	mVolumeWake = (CheckBoxPreference) findPreference(KEY_VOLUME_WAKE);
+	    mVolumeWake = (CheckBoxPreference) findPreference(KEY_VOLUME_WAKE);
         if (mVolumeWake != null) {
             mVolumeWake.setChecked(Settings.System.getInt(resolver,
                     Settings.System.VOLUME_WAKE_SCREEN, 0) == 1);
@@ -298,16 +300,18 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             return false;
 
         } else if (preference == mSafeHeadsetRestore) {
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.SAFE_HEADSET_VOLUME_RESTORE,
-                    mSafeHeadsetRestore.isChecked() ? 1 : 0);
+            Settings.System.putInt(getContentResolver(), Settings.System.SAFE_HEADSET_VOLUME_RESTORE,
+            mSafeHeadsetRestore.isChecked() ? 1 : 0);
+                    
         } else if (preference == mVolumeWake) {
             Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_WAKE_SCREEN,
             mVolumeWake.isChecked() ? 1 : 0);
             return true;
+            
         } else if (preference == mVolBtnMusicCtrl) {
             Settings.System.putInt(getContentResolver(), Settings.System.VOLBTN_MUSIC_CONTROLS,
             mVolBtnMusicCtrl.isChecked() ? 1 : 0);
+            
         } else {
             // If we didn't handle it, let preferences handle it.
             return super.onPreferenceTreeClick(preferenceScreen, preference);
