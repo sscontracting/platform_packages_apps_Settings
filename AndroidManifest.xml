@@ -1179,7 +1179,7 @@
 
         <activity android:name="ActivityPicker"
                 android:label="@string/activity_picker_label"
-                android:theme="@*android:style/Theme.Holo.Dialog.Alert"
+                android:theme="@*android:style/Theme.Dialog.Alert"
                 android:finishOnCloseSystemDialogs="true">
             <intent-filter>
                 <action android:name="android.intent.action.PICK_ACTIVITY" />
@@ -1465,11 +1465,7 @@
                 android:resource="@id/wireless_settings" />
         </activity>
 
-        <activity android:name=".vanir.LockscreenTargets" />
-
-        <activity android:name=".vanir.LockscreenInterface" />
-
-	    <activity android:name=".notificationlight.NotificationLightSettings" />
+	<activity android:name=".notificationlight.NotificationLightSettings" />
 
         <activity android:name=".notificationlight.BatteryLightSettings" />
 
