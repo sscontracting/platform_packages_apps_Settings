@@ -91,6 +91,7 @@ public class DevelopmentSettings extends PreferenceFragment
     public static final String PREF_SHOW = "show";
 
     private static final String ENABLE_ADB = "enable_adb";
+    private static final String ADB_ICON = "adb_icon";
     private static final String ADB_TCPIP  = "adb_over_network";
     private static final String KEEP_SCREEN_ON = "keep_screen_on";
     private static final String ALLOW_MOCK_LOCATION = "allow_mock_location";
@@ -153,6 +154,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private boolean mDontPokeProperties;
 
     private CheckBoxPreference mEnableAdb;
+    private CheckBoxPreference mAdbIcon;
     private CheckBoxPreference mAdbOverNetwork;
     private Preference mBugreport;
     private CheckBoxPreference mBugreportInPower;
@@ -216,6 +218,7 @@ public class DevelopmentSettings extends PreferenceFragment
         addPreferencesFromResource(R.xml.development_prefs);
 
         mEnableAdb = findAndInitCheckboxPref(ENABLE_ADB);
+        mAdbIcon = findAndInitCheckboxPref(ADB_ICON);
         mAdbOverNetwork = findAndInitCheckboxPref(ADB_TCPIP);
         mBugreport = findPreference(BUGREPORT);
         mBugreportInPower = findAndInitCheckboxPref(BUGREPORT_IN_POWER_KEY);
@@ -405,6 +408,8 @@ public class DevelopmentSettings extends PreferenceFragment
         updateCheckBox(mEnableAdb, Settings.Global.getInt(cr,
                 Settings.Global.ADB_ENABLED, 0) != 0);
         updateAdbOverNetwork();
+        mAdbIcon.setChecked(Settings.Secure.getInt(cr,
+                Settings.Secure.ADB_ICON, 1) != 0);
         updateCheckBox(mBugreportInPower, Settings.Secure.getInt(cr,
                 Settings.Secure.BUGREPORT_IN_POWER_MENU, 0) != 0);
         updateCheckBox(mKeepScreenOn, Settings.Global.getInt(cr,
@@ -1071,6 +1076,10 @@ public class DevelopmentSettings extends PreferenceFragment
                 mVerifyAppsOverUsb.setChecked(false);
                 updateBugreportOptions();
             }
+            } else if (preference == mAdbIcon) {
+            Settings.Secure.putInt(getActivity().getContentResolver(),
+                    Settings.Secure.ADB_ICON,
+                    mAdbIcon.isChecked() ? 1 : 0);
          } else if (preference == mAdbOverNetwork) {
             if (mAdbOverNetwork.isChecked()) {
                 if (mAdbTcpDialog != null) {
