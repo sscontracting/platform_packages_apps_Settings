@@ -295,8 +295,8 @@
         <item>@string/wifi_security_psk_generic</item>
     </string-array>
 
-    <!-- Wi-Fi AP settings.  The type of security a Wi-Fi AP supports. -->
-    <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
+   <!-- Wi-Fi AP settings.  The type of security a Wi-Fi AP supports. -->
+   <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
     <string-array name="wifi_ap_security">
         <item>@string/wifi_security_none</item>
         <item>@string/wifi_security_wpa</item>
@@ -423,7 +423,14 @@
         <item>PWD</item>
     </string-array>
 
-    <!-- Phase 2 options -->
+    <!-- Phase 2 options for PEAP -->
+    <string-array name="wifi_peap_phase2_entries">
+        <item>None</item>
+        <item>MSCHAPV2</item>
+        <item>GTC</item>
+    </string-array>
+
+    <!-- Phase 2 options for rest of EAP methods -->
     <string-array name="wifi_phase2_entries">
         <item>None</item>
         <item>PAP</item>
@@ -541,7 +548,30 @@
         <item>0</item>
     </string-array>
 
-    <!-- Apps on SD installation location options in ApplicationSettings -->
+    <!-- MVNO Info used in APN editor -->
+    <string-array name="mvno_type_entries">
+        <!-- Do not translate. -->
+        <item>None</item>
+        <!-- Do not translate. -->
+        <item>SPN</item>
+        <!-- Do not translate. -->
+        <item>IMSI</item>
+        <!-- Do not translate. -->
+        <item>GID</item>
+    </string-array>
+
+    <string-array translatable="false" name="mvno_type_values">
+        <!-- Do not translate. -->
+        <item></item>
+        <!-- Do not translate. -->
+        <item>spn</item>
+        <!-- Do not translate. -->
+        <item>imsi</item>
+        <!-- Do not translate. -->
+        <item>gid</item>
+    </string-array>
+
+    <!-- Apps on SD instalaltion location options in ApplicationSettings -->
     <string-array name="app_install_location_entries">
         <item>Internal device storage</item>
         <item>Removable SD card</item>

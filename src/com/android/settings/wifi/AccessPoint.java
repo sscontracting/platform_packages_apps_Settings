@@ -368,6 +368,10 @@ class AccessPoint extends Preference {
                 case WifiConfiguration.DISABLED_UNKNOWN_REASON:
                     summary.append(context.getString(R.string.wifi_disabled_generic));
             }
+        } else if (mRssi == Integer.MAX_VALUE) { // Wifi out of range
+            setSummary(context.getString(R.string.wifi_not_in_range));
+        } else if (mState != null) { // This is the active connection
+            setSummary(Summary.get(context, mState));
         } else { // In range, not disabled.
             if (mConfig != null) { // Is saved network
                 summary.append(context.getString(R.string.wifi_remembered));

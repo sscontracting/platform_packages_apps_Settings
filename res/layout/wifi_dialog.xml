@@ -150,9 +150,8 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                style="@style/wifi_item">
-
+            <LinearLayout android:id="@+id/password_layout"
+                       style="@style/wifi_item" >
                 <TextView
                     style="@style/wifi_item_label"
                     android:text="@string/wifi_password" />
@@ -163,9 +162,9 @@
                     android:password="true" />
             </LinearLayout>
 
-            <LinearLayout
-                style="@style/wifi_item">
-                <!-- Dummy to enable right-justification of checkbox -->
+            <LinearLayout android:id="@+id/show_password_layout"
+                    style="@style/wifi_item" >
+                <!--  Dummy to enable right-justification of checkbox -->
                 <TextView
                     style="@style/wifi_item_label" />
 

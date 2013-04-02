@@ -2151,6 +2151,10 @@
     <string name="carrier_enabled_summaryOff">APN disabled</string>
     <!-- Edit Beaerer Info of APN -->
     <string name="bearer">Bearer</string>
+    <!-- Edit Mvno Type Info of APN -->
+    <string name="mvno_type">MVNO type</string>
+    <!-- Edit Mvno Match Data Info of APN -->
+    <string name="mvno_match_data">MVNO value</string>
     <!-- Edit access point screen menu option to delete this APN -->
     <string name="menu_delete">Delete APN</string>
     <!-- APNs screen menu option to create a brand spanking new APN -->
@@ -3552,6 +3556,12 @@
     <string name="trusted_credentials">Trusted credentials</string>
     <!-- Summary of preference to display trusted credentials (aka CA certificates) [CHAR LIMIT=NONE] -->
     <string name="trusted_credentials_summary">Display trusted CA certificates</string>
+    <!-- Title of preference of what type of credential storage this device has: hardware or software [CHAR LIMIT=30] -->
+    <string name="credential_storage_type">Storage type</string>
+    <!-- Summary text for preference showing what type of credential storage this device has when it is stored in a hardware-backed storage (as opposed to "software only") [CHAR LIMIT=NONE] -->
+    <string name="credential_storage_type_hardware">Hardware-backed</string>
+    <!-- Summary text for preference showing what type of credential storage this device has when it is stored in software only (as opposed to "hardware-backed") [CHAR LIMIT=NONE] -->
+    <string name="credential_storage_type_software">Software only</string>
 
     <!-- Message to draw an unlock pattern when installing credentials -->
     <string name="credentials_install_gesture_prompt">Draw your unlock pattern</string>
