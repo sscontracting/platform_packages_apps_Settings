@@ -880,7 +880,7 @@
         <item>48 dp (Default)</item>
         <item>46 dp</item>
         <item>44 dp</item>
-        <item>42 dp (Primo)</item>
+        <item>42 dp</item>
         <item>40 dp</item>
         <item>38 dp</item>
         <item>36 dp</item>
@@ -942,29 +942,31 @@
         <item>Home</item>
         <item>Back</item>
         <item>Recents</item>
+        <item>Last app</item> 
         <item>Search</item>
-        <item>Screenshot</item>
         <item>Menu</item>
-        <item>open_ime_switcher</item>
+        <item>IME Switcher</item>
         <item>Kill app</item>
         <item>Power</item>
         <item>notifications</item>
         <item>Custom app</item>
         <item>Blank</item>
+        <item>Null</item>
     </string-array>
 
     <string-array name="navbar_button_values" translatable="false">
         <item>**home**</item>
         <item>**back**</item>
         <item>**recents**</item>
+        <item>**lastapp**</item> 
         <item>**search**</item>
-        <item>**screenshot**</item>
         <item>**menu**</item>
         <item>**ime**</item>
         <item>**kill**</item>
         <item>**power**</item>
         <item>**notifications**</item>
         <item>**app**</item>
+        <item>**blank**</item>
         <item>**null**</item>
     </string-array>
 
@@ -976,6 +978,7 @@
         <item>@string/ring_silent</item>
         <item>@string/ring_vib_silent</item>
         <item>@string/kill_app</item>
+        <item>@string/lastapp</item> 
         <item>@string/screen_off</item>
         <item>@string/google_now</item>
         <item>@string/select_application</item>
@@ -988,6 +991,7 @@
         <item>**ring_silent**</item>
         <item>**ring_vib_silent**</item>
         <item>**kill**</item>
+        <item>**lastapp**</item> 
         <item>**power**</item>
         <item>**assist**</item>
         <item>**app**</item>
@@ -1175,6 +1179,7 @@
         <item>QUICKRECORD</item>
 <!--        <item>WEATHER</item>  -->
         <item>MEMORY</item>
+        <item>REBOOTMENU</item>
     </string-array>
 
     <string-array name="available_toggles_values" translatable="false">
@@ -1204,6 +1209,7 @@
         <item>@string/toggle_quickrecord</item>
  <!--       <item>@string/toggle_weather</item> -->
         <item>@string/toggle_memory</item>
+        <item>@string/toggle_rebootmenu</item>
     </string-array>
 
     <!-- Toggles per row -->
@@ -1389,17 +1395,17 @@
         <item>@string/status_bar_battery_status_icon</item>
         <item>@string/status_bar_battery_status_percentage</item>
         <item>@string/status_bar_battery_status_circle</item>
+        <item>@string/status_bar_battery_status_gear</item>
         <item>@string/status_bar_battery_status_circle_percentage</item>
         <item>@string/status_bar_battery_status_hidden</item>
-        <item>@string/status_bar_battery_status_gear</item>
     </string-array>
     <string-array name="values_status_bar_battery" translatable="false">
         <item>0</item>
         <item>1</item>
         <item>2</item>
+        <item>5</item>
         <item>3</item>
         <item>4</item>
-        <item>5</item>
     </string-array>
     <string-array name="entries_status_bar_signal" translatable="false">
         <item>@string/status_bar_style_icon</item>
@@ -1577,6 +1583,19 @@
     </string-array>
 
     <string-array name="values_system_power_crt_mode" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- MediaScanner behavior on boot -->
+    <string-array name="media_scanner_on_boot_entries">
+        <item>@string/media_scanner_on_boot_enabled</item>
+        <item>@string/media_scanner_on_boot_ask</item>
+        <item>@string/media_scanner_on_boot_disabled</item>
+    </string-array>
+
+    <string-array name="media_scanner_on_boot_values" translatable="false">
         <item>0</item>
         <item>1</item>
         <item>2</item>

@@ -78,8 +78,8 @@ import java.util.List;
 public class DevelopmentSettings extends PreferenceFragment
         implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener,
                 OnPreferenceChangeListener, CompoundButton.OnCheckedChangeListener {
-					
-	private static final String TAG = "DevelopmentSettings";
+
+       private static final String TAG = "DevelopmentSettings";
 
     /**
      * Preference file were development settings prefs are stored.
@@ -129,6 +129,8 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String DEBUG_DEBUGGING_CATEGORY_KEY = "debug_debugging_category";
     private static final String OPENGL_TRACES_KEY = "enable_opengl_traces";
 
+    private static final String KILL_APP_LONGPRESS_BACK = "kill_app_longpress_back";
+
     private static final String ENABLE_TRACES_KEY = "enable_traces";
 
     private static final String IMMEDIATELY_DESTROY_ACTIVITIES_KEY
@@ -141,6 +143,8 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String TAG_CONFIRM_ENFORCE = "confirm_enforce";
 
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
+
+    private static final String MEDIA_SCANNER_ON_BOOT = "media_scanner_on_boot";
 
     private static final int RESULT_DEBUG_APP = 1000;
 
@@ -187,12 +191,14 @@ public class DevelopmentSettings extends PreferenceFragment
     private ListPreference mOverlayDisplayDevices;
     private ListPreference mOpenGLTraces;
     private MultiCheckPreference mEnableTracesPref;
+    private CheckBoxPreference mKillAppLongpressBack;
 
     private CheckBoxPreference mImmediatelyDestroyActivities;
     private ListPreference mAppProcessLimit;
 
     private CheckBoxPreference mShowAllANRs;
 
+    private ListPreference mMSOB;
     private final ArrayList<Preference> mAllPrefs = new ArrayList<Preference>();
     private final ArrayList<CheckBoxPreference> mResetCbPrefs
             = new ArrayList<CheckBoxPreference>();
@@ -226,6 +232,10 @@ public class DevelopmentSettings extends PreferenceFragment
         mAllowMockLocation = findAndInitCheckboxPref(ALLOW_MOCK_LOCATION);
         mPassword = (PreferenceScreen) findPreference(LOCAL_BACKUP_PASSWORD);
         mAllPrefs.add(mPassword);
+
+        mMSOB = (ListPreference) findPreference(MEDIA_SCANNER_ON_BOOT);
+        mAllPrefs.add(mMSOB);
+        mMSOB.setOnPreferenceChangeListener(this);
 
         if (!android.os.Process.myUserHandle().equals(UserHandle.OWNER)) {
             disableForUser(mEnableAdb);
@@ -301,6 +311,21 @@ public class DevelopmentSettings extends PreferenceFragment
             mAllPrefs.add(hdcpChecking);
         }
         removeHdcpOptionsForProduction();
+
+		mKillAppLongpressBack = (CheckBoxPreference) findPreference(KILL_APP_LONGPRESS_BACK);
+        mAllPrefs.add(mKillAppLongpressBack);
+        updateKillAppLongpressBackOptions();
+    }
+
+    private void writeKillAppLongpressBackOptions() {
+	        Settings.Secure.putInt(getActivity().getContentResolver(),
+	                Settings.Secure.KILL_APP_LONGPRESS_BACK,
+                mKillAppLongpressBack.isChecked() ? 1 : 0);
+    }
+	
+    private void updateKillAppLongpressBackOptions() {
+        mKillAppLongpressBack.setChecked(Settings.Secure.getInt(
+            getActivity().getContentResolver(), Settings.Secure.KILL_APP_LONGPRESS_BACK, 0) != 0);
     }
 
     private void disableForUser(Preference pref) {
@@ -450,8 +475,28 @@ public class DevelopmentSettings extends PreferenceFragment
         updateShowAllANRsOptions();
         updateVerifyAppsOverUsbOptions();
         updateBugreportOptions();
+        updateMSOBOptions();
     }
-    
+
+    private void resetMSOBOptions() {
+        Settings.System.putInt(getActivity().getContentResolver(),
+                Settings.System.MEDIA_SCANNER_ON_BOOT, 0);
+    }
+
+    private void writeMSOBOptions(Object newValue) {
+        Settings.System.putInt(getActivity().getContentResolver(),
+                Settings.System.MEDIA_SCANNER_ON_BOOT,
+                Integer.valueOf((String) newValue));
+        updateMSOBOptions();
+    }
+
+    private void updateMSOBOptions() {
+        int value = Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.MEDIA_SCANNER_ON_BOOT, 0);
+        mMSOB.setValue(String.valueOf(value));
+        mMSOB.setSummary(mMSOB.getEntry());
+    }
+
     private void updateAdbOverNetwork() {
         int port = Settings.Secure.getInt(getActivity().getContentResolver(),
                 Settings.Secure.ADB_PORT, 0);
@@ -490,6 +535,7 @@ public class DevelopmentSettings extends PreferenceFragment
             }
         }
         resetDebuggerOptions();
+        resetMSOBOptions();
         writeAnimationScaleOption(0, mWindowAnimationScale, null);
         writeAnimationScaleOption(1, mTransitionAnimationScale, null);
         writeAnimationScaleOption(2, mAnimatorDurationScale, null);
@@ -1151,6 +1197,8 @@ public class DevelopmentSettings extends PreferenceFragment
             writeShowHwOverdrawOptions();
         } else if (preference == mDebugLayout) {
             writeDebugLayoutOptions();
+        } else if (preference == mKillAppLongpressBack) {
+            writeKillAppLongpressBackOptions();
         }
 
         return false;
@@ -1183,6 +1231,9 @@ public class DevelopmentSettings extends PreferenceFragment
             return true;
         } else if (preference == mAppProcessLimit) {
             writeAppProcessLimitOptions(newValue);
+            return true;
+        } else if (preference == mMSOB) {
+            writeMSOBOptions(newValue);
             return true;
         }
         return false;
