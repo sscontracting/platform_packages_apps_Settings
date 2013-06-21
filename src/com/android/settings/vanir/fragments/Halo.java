@@ -16,6 +16,7 @@
 
 package com.android.settings.vanir.fragments;
 
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.INotificationManager;
 import android.content.Context;
@@ -30,6 +31,7 @@ import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 
@@ -41,13 +43,17 @@ import com.vanir.util.Helpers;
 public class Halo extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener {
 
+    private static final String KEY_HALO_ENABLED = "halo_enabled";
     private static final String KEY_HALO_STATE = "halo_state";
     private static final String KEY_HALO_HIDE = "halo_hide";
     private static final String KEY_HALO_REVERSED = "halo_reversed";
+    private static final String KEY_HALO_PAUSE = "halo_pause";
 
+    private SwitchPreference mHaloEnabled;
     private ListPreference mHaloState;
     private CheckBoxPreference mHaloHide;
     private CheckBoxPreference mHaloReversed;
+    private CheckBoxPreference mHaloPause;
 
     private Context mContext;
     private INotificationManager mNotificationManager;
@@ -64,6 +70,11 @@ public class Halo extends SettingsPreferenceFragment
         mNotificationManager = INotificationManager.Stub.asInterface(
                 ServiceManager.getService(Context.NOTIFICATION_SERVICE));
 
+        mHaloEnabled = (SwitchPreference) findPreference(KEY_HALO_ENABLED);
+        mHaloEnabled.setChecked((Settings.System.getInt(getContentResolver(),
+            Settings.System.HALO_ENABLED, 0) == 1));
+        mHaloEnabled.setOnPreferenceChangeListener(this);
+
         mHaloState = (ListPreference) prefSet.findPreference(KEY_HALO_STATE);
         mHaloState.setValue(String.valueOf((isHaloPolicyBlack() ? "1" : "0")));
         mHaloState.setOnPreferenceChangeListener(this);
@@ -75,6 +86,11 @@ public class Halo extends SettingsPreferenceFragment
         mHaloReversed = (CheckBoxPreference) prefSet.findPreference(KEY_HALO_REVERSED);
         mHaloReversed.setChecked(Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.HALO_REVERSED, 1) == 1);
+
+        int isLowRAM = (ActivityManager.isLargeRAM()) ? 0 : 1;
+        mHaloPause = (CheckBoxPreference) prefSet.findPreference(KEY_HALO_PAUSE);
+        mHaloPause.setChecked(Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.HALO_PAUSE, isLowRAM) == 1);
 
         }
 
@@ -97,12 +113,22 @@ public class Halo extends SettingsPreferenceFragment
             Settings.System.putInt(mContext.getContentResolver(),
                     Settings.System.HALO_REVERSED, mHaloReversed.isChecked()
                     ? 1 : 0);
+        } else if (preference == mHaloPause) {
+            Settings.System.putInt(mContext.getContentResolver(),
+                    Settings.System.HALO_PAUSE, mHaloPause.isChecked()
+                    ? 1 : 0);
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mHaloState) {
+        if (preference == mHaloEnabled) {
+            boolean value = ((Boolean)newValue).booleanValue();
+             Settings.System.putInt(mContext.getContentResolver(),
+                    Settings.System.HALO_ENABLED,
+                    value ? 1 : 0);
+            return true;
+        } else if (preference == mHaloState) {
             boolean state = Integer.valueOf((String) newValue) == 1;
             try {
                 mNotificationManager.setHaloPolicyBlack(state);

@@ -4697,6 +4697,7 @@ Letting go of the power button will turn the torch off.</string>
 
     <!-- App sidebar -->
     <string name="app_sidebar_title">Appbar</string>
+    <string name="app_sidebar_title_summary">Adjust Appbar settings</string>
     <string name="app_sidebar_enable_title">Enable Appbar</string>
     <string name="app_sidebar_enable_summaryOn">Appbar is enabled</string>
     <string name="app_sidebar_enable_summaryOff">Appbar is disabled</string>
@@ -5119,6 +5120,9 @@ Letting go of the power button will turn the torch off.</string>
     <!-- HALO -->
     <string name="halo_settings_title">HALO Settings</string>
     <string name="halo_settings_summary">Adjust the HALO settings</string>
+    <string name="halo_enabled_title">Enable HALO</string>
+    <string name="halo_enabled_summaryOn">HALO is enabled</string>
+    <string name="halo_enabled_summaryOff">HALO is disabled</string>
     <string name="halo_hide_title">Hide HALO after activity</string>
     <string name="halo_hide_summary">HALO will appear for incoming tasks and scroll out of sight after a while</string>
     <string name="halo_reversed_title">Reverse HALO gestures</string>
@@ -5127,6 +5131,8 @@ Letting go of the power button will turn the torch off.</string>
     <string name="halo_state_summary">For black/white-listing notifications pinging through HALO</string>
     <string name="halo_state_black">Black list</string>
     <string name="halo_state_white">White list</string>
+    <string name="halo_pause_title">HALO pause active app</string>
+    <string name="halo_pause_summary">When opening an app with HALO the underlying app will get paused (enabled by default on low memory devices)</string>
 
     <!-- Advanced, Device specific (DeviceParts) settings -->
     <string name="advanced_settings_title">Advanced</string>
@@ -5167,7 +5173,8 @@ Letting go of the power button will turn the torch off.</string>
     <string name="pie_controls_title">Pie Controls</string>
     <string name="pie_controls_summary">Adjust the Pie controls</string>
     <string name="pie_enable_title">Enable Pie</string>
-    <string name="pie_enable_summary">Nom nom nom nom</string>
+    <string name="pie_enable_summaryOn">Nom nom nom nom</string>
+    <string name="pie_enable_summaryOff">No Nom nom nom nom</string>
     <string name="pie_expanded_only_title">Only in expanded desktop</string>
     <string name="pie_expanded_only_summary">Only allow pie to work when Expanded Desktop is on</string>
     <string name="pie_gravity_title">Pie gravity</string>
