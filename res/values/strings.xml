@@ -5186,7 +5186,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="status_bar_style_hidden">Hidden</string>
     <string name="status_bar_signal_text_show_text">Text</string>
     <string name="status_bar_battery_status_percentage">Percentage</string>
-    <!--<string name="status_bar_battery_status_icon_percentage">Icon with percentage</string>-->
+    <string name="status_bar_battery_status_icon_percentage">Icon with percentage</string>
     <string name="status_bar_battery_status_circle">Circle</string>
     <string name="status_bar_battery_status_circle_percentage">Circle with percentage</string>
     <string name="status_bar_battery_status_beanstalk">BeanStalk</string>
